@@ -26,3 +26,26 @@ The all tasks page has just an image with a back button.
 ## This is the Add task page
 
 ![image3](screenshots/addtask.png)
+
+
+# Modefied Home page 
+It has a three extra buttons and thay navigate the user to detail page , and setting button and it naviate the user to settings page .
+<br>
+![home page image](screenshots/homepagelab27.png)
+
+
+## The Detail Page
+ It has a title at the top of the page, and a Lorem Ipsum description.
+ <br>
+![image](screenshots/homeworktaskLab27.png)
+![image](screenshots/gameworktasklab27.png)
+![image](screenshots/coffeworktasklab27.png)
+
+## Settings Page
+ It allows users to enter their username and hit save.
+ <br>
+![image](screenshots/settingslab27.png)
+
+
+
+
