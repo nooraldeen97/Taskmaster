@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToSettingsPage);
             }
         });
+
+
+        ArrayList<Task> allTasks = new ArrayList<Task>();
+        allTasks.add(new Task("Game","playing a Game","complete"));
+        allTasks.add(new Task("Do Homework","solve equations","in progress"));
+        allTasks.add(new Task("walking","one hour walking","assigned"));
+
+        RecyclerView recyclerView = findViewById(R.id.TaskRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new TaskAdapter(allTasks));
     }
 
 
