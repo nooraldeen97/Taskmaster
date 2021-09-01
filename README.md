@@ -1,3 +1,4 @@
+# lab 26
 
 **Homepage**
 
@@ -27,6 +28,9 @@ The all tasks page has just an image with a back button.
 
 ![image3](screenshots/addtask.png)
 
+<hr>
+
+## lab 27
 
 # Modefied Home page 
 It has a three extra buttons and thay navigate the user to detail page , and setting button and it naviate the user to settings page .
@@ -46,6 +50,12 @@ It has a three extra buttons and thay navigate the user to detail page , and set
  <br>
 ![image](screenshots/settingslab27.png)
 
+<hr>
 
+# lab 28
 
+# Modefied Home page 
+It has a Recycler view that dislay the data on it  .
+<br>
+![home page image](screenshots/home28.png)
 
