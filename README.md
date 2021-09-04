@@ -59,3 +59,13 @@ It has a Recycler view that dislay the data on it  .
 <br>
 ![home page image](screenshots/home28.png)
 
+<hr>
+
+# lab 29
+
+<hr>
+
+The data is got from the form and saving it on the database and then get it from data base and render it on the home page instead of having them as a hard code .
+
+![home page image](screenshots/home29.png)
+![add task image](screenshots/addtask29.png)
