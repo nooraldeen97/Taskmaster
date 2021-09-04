@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,8 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    AppDatabase appDatabase;
+    TaskDao taskDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn2=findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn1 =findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent moveToAddTask =new Intent(MainActivity.this,AddTask.class);
@@ -89,11 +95,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "TaskDatabase").allowMainThreadQueries().build();
 
-        ArrayList<Task> allTasks = new ArrayList<Task>();
-        allTasks.add(new Task("Game","playing a Game","complete"));
-        allTasks.add(new Task("Do Homework","solve equations","in progress"));
-        allTasks.add(new Task("walking","one hour walking","assigned"));
+        taskDao = appDatabase.taskDao();
+        List<Task> allTasks =taskDao.getAll();
+
+//        allTasks.add(new Task("Game","playing a Game","complete"));
+//        allTasks.add(new Task("Do Homework","solve equations","in progress"));
+//        allTasks.add(new Task("walking","one hour walking","assigned"));
 
         RecyclerView recyclerView = findViewById(R.id.TaskRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
