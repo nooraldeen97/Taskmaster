@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        String owner= "’s tasks";
+        String owner= "'s tasks";
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String userNameFromInput=sharedPreferences.getString("userName","visitor");
 

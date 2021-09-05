@@ -29,6 +29,10 @@ public class SettingsPage extends AppCompatActivity {
 
                 sharedPreferencesEditor.putString("userName",userName);
                 sharedPreferencesEditor.apply();
+
+                Intent goToHome=new Intent(SettingsPage.this,MainActivity.class);
+                startActivity(goToHome);
+
             }
         });
     }
