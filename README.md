@@ -69,3 +69,13 @@ The data is got from the form and saving it on the database and then get it from
 
 ![home page image](screenshots/home29.png)
 ![add task image](screenshots/addtask29.png)
+
+<hr>
+
+# lab 31
+
+<hr>
+
+It Is added  UI tests for taskmaster application, and polish for remaining feature tasks from previous labs.
+
+its include tests for views displayed on the pages ,  tests for textView content , and some tests for moving between pages .
