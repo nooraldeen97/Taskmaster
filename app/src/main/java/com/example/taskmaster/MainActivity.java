@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,11 +10,23 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.MyTask;
+import com.amplifyframework.datastore.generated.model.Tasks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +34,22 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     AppDatabase appDatabase;
     TaskDao taskDao;
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            // Add these lines to add the AWSApiPlugin plugins
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+        }
+
+
         setContentView(R.layout.activity_main);
 
         Button btn2=findViewById(R.id.btn2);
@@ -95,18 +120,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "TaskDatabase").allowMainThreadQueries().build();
 
-        taskDao = appDatabase.taskDao();
-        List<Task> allTasks =taskDao.getAll();
+
+
+
+
+//        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "TaskDatabase").allowMainThreadQueries().build();
+//
+//        taskDao = appDatabase.taskDao();
+//        List<Task> allTasks =taskDao.getAll();
 
 //        allTasks.add(new Task("Game","playing a Game","complete"));
 //        allTasks.add(new Task("Do Homework","solve equations","in progress"));
 //        allTasks.add(new Task("walking","one hour walking","assigned"));
 
-        RecyclerView recyclerView = findViewById(R.id.TaskRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new TaskAdapter(allTasks));
+
     }
 
 
@@ -114,6 +142,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        Handler handler=new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message message) {
+                recyclerView.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
+        ArrayList<MyTask> allTasks=new ArrayList<MyTask>();
+        recyclerView = findViewById(R.id.TaskRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new TaskAdapter(allTasks));
+
+        Amplify.API.query(
+                ModelQuery.list(MyTask.class),
+                response -> {
+                    Log.i("responseData", "here is my response"+response.toString());
+                    for (MyTask task : response.getData()) {
+                        Log.i("MyAmplifyApp", task.getTitle());
+                        Log.i("MyAmplifyApp", task.getBody());
+                        Log.i("MyAmplifyApp", task.getState());
+                        allTasks.add(task);
+                    }
+                    handler.sendEmptyMessage(1);
+                    Log.i("MyAmplifyApp", "outside the loop");
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
     }
 
     @Override
