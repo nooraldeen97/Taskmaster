@@ -79,3 +79,24 @@ The data is got from the form and saving it on the database and then get it from
 It Is added  UI tests for taskmaster application, and polish for remaining feature tasks from previous labs.
 
 its include tests for views displayed on the pages ,  tests for textView content , and some tests for moving between pages .
+
+
+<hr>
+
+# lab 32
+
+<hr>
+
+**Add Task Form** <br>
+
+add task functionality Modified to save the data entered in as a Task to graphQL. <br>
+(No changes in UI)<br>
+
+**Homepage** <br>
+
+homepage’s RecyclerView refactored to display all Task entities in graphQL.<br>
+(No changes in UI)<br>
+
+here is my queries in the cloud<br>
+
+![GraphQl](screenshots/grapgql.png)
