@@ -27,6 +27,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.MyTask;
 import com.amplifyframework.datastore.generated.model.Tasks;
+import com.amplifyframework.datastore.generated.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,36 @@ public class MainActivity extends AppCompatActivity {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.configure(getApplicationContext());
+// Adding three hard coded teams by running mutuation three times to the database.
+
+            //            Team team1 = Team.builder()
+//                    .name("DG Team")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team1),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
+            //     Team team2 = Team.builder()
+//                    .name("Nerd Team")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team2),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
+
+//            Team team3 = Team.builder()
+//                    .name("DG Team")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team3),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
