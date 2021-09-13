@@ -100,3 +100,22 @@ homepage’s RecyclerView refactored to display all Task entities in graphQL.<br
 here is my queries in the cloud<br>
 
 ![GraphQl](screenshots/grapgql.png)
+
+
+<hr>
+
+# lab 33
+
+<hr>
+
+Feature Tasks<br>
+Tasks Are Owned By Teams<br>
+Create a second entity for a team, which has a name and a list of tasks. Update your tasks to be owned by a <br>team.<br>
+
+Manually created three teams by running a mutation exactly three times in your code. (You do NOT need to allow <br>the user to create new teams.)<br>
+
+Add Task Form<br>
+Modify your Add Task form to include either a Spinner or Radio Buttons for which team that task belongs to.<br>
+
+Settings Page<br>
+In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display <br>only that team’s tasks on the homepage.<br>
