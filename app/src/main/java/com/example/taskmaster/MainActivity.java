@@ -46,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.configure(getApplicationContext());
+
+            Amplify.Auth.signInWithWebUI(
+                    this,
+                    result -> Log.i("AuthQuickStart", result.toString()),
+                    error -> Log.e("AuthQuickStart", error.toString())
+            );
 // Adding three hard coded teams by running mutuation three times to the database.
 
             //            Team team1 = Team.builder()
@@ -91,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
 //        );
 //sign up confimation activity to enter the code the he recieved.
 
-        Amplify.Auth.confirmSignUp(
-                "nooraldeen",
-                "285210",
-                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
-                error -> Log.e("AuthQuickstart", error.toString())
-        );
+//        Amplify.Auth.confirmSignUp(
+//                "nooraldeen",
+//                "285210",
+//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
 
 
 //        Amplify.Auth.signIn(
@@ -109,6 +115,17 @@ public class MainActivity extends AppCompatActivity {
 //                result -> Log.i("AmplifyQuickstart", result.toString()),
 //                error -> Log.e("AmplifyQuickstart", error.toString())
 //        );
+
+        Button signOutButton=findViewById(R.id.signOutId);
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Amplify.Auth.signOut(
+                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+            }
+        });
 
 
         setContentView(R.layout.activity_main);

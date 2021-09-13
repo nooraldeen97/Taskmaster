@@ -6,11 +6,7 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 15,
-              "description": "description"
-            }
+            "authenticationType": "AWS_IAM"
           },
           "additionalAuthenticationProviders": []
         }
@@ -18,7 +14,7 @@
     }
   },
   "auth": {
-    "taskmaster54aa4f11": {
+    "taskmaster92c26669": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
