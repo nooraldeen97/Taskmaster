@@ -26,46 +26,46 @@ import com.amplifyframework.datastore.generated.model.Team;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class AddTask extends AppCompatActivity {
 
     AppDatabase appDatabase;
     TaskDao taskDao;
-    String teamName="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-        RadioButton radioButton1=findViewById(R.id.nerdId);
-        radioButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name1 =radioButton1.getText().toString();
-                teamName=name1;
-            }
-        });
+
+
+        // calling the action bar
+        ActionBar actionBar=getSupportActionBar();
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
 
         // getting all teams form the database .
-        ArrayList<Team> allTeam=new ArrayList<Team>();
-//        Team team1=allTeam.get(0);
-        System.out.println(allTeam);
 
-        Amplify.API.query(
-                ModelQuery.list(Team.class),
-                response -> {
-//                    Log.i("responseData", "here is my response"+response.getData());
+        List<Team> allTeam=new ArrayList<>();
 
-                    for (Team team  : response.getData()) {
-                        Log.i("MyAmplifyApp", team.getName());
-                        System.out.println(team);
-                        allTeam.add(team);
-                    }
-                    Log.i("MyAmplifyApp", "outside the loop");
-                },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
-        );
+            Amplify.API.query(
+                    ModelQuery.list(Team.class),
+                    response -> {
+
+                        for (Team team  : response.getData()) {
+                            allTeam.add(team);
+
+                        }
+                        Log.i("MyAmplifyApp", "outside the loop");
+                    },
+                    error -> Log.e("MyAmplifyApp", "Query failure", error)
+            );
+
+
+
 
 
 
@@ -81,22 +81,42 @@ public class AddTask extends AppCompatActivity {
                 EditText taskStateInput = findViewById(R.id.stateId);
                 String taskState=taskStateInput.getText().toString();
 
+                RadioButton nerd = findViewById(R.id.nerdId);
+                RadioButton noor = findViewById(R.id.noorId);
+                RadioButton dg = findViewById(R.id.dgId);
 
-
-
-//                MyTask tasks = MyTask.builder()
-//                        .title(taskName)
-//                        .team()
-//                        .body(taskBody)
-//                        .state(taskState)
-//                        .build();
-//
-//                Amplify.API.mutate(
-//                        ModelMutation.create(tasks),
-//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
                 // get team name from radio button
+
+                String name="";
+                if(nerd.isChecked()) {
+//                   id = "f7441181-f7a9-42f0-96e0-830c77066f0a";
+                    name="Nerd Team";
+                }else if(noor.isChecked()){
+                    name = "Noor Team";
+                }else if(dg.isChecked()){
+                    name = "DG Team";
+                }
+                Team specificTeam=null;
+                for (int i = 0; i < allTeam.size(); i++) {
+                    if(allTeam.get(i).getName().equals(name)){
+                        specificTeam = allTeam.get(i);
+                    }
+                }
+
+
+
+                MyTask tasks = MyTask.builder()
+                        .title(taskName)
+                        .team(specificTeam)
+                        .body(taskBody)
+                        .state(taskState)
+                        .build();
+
+                Amplify.API.mutate(
+                        ModelMutation.create(tasks),
+                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+                );
 
 
 //                appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "TaskDatabase").allowMainThreadQueries().build();
@@ -106,14 +126,10 @@ public class AddTask extends AppCompatActivity {
             }
         });
 
-        // calling the action bar
-        ActionBar actionBar=getSupportActionBar();
-        // showing the back button in action bar
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
 
     }
-
 
 
 }
