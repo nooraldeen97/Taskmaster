@@ -36,5 +36,13 @@
         ]
       }
     }
+  },
+  "notifications": {
+    "taskmasterhcAGD": {
+      "service": "Pinpoint",
+      "channels": [
+        "FCM"
+      ]
+    }
   }
 }
