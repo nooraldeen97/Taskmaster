@@ -102,18 +102,27 @@ public class MainActivity extends AppCompatActivity {
             Amplify.addPlugin(new AWSApiPlugin());
 //            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
-//            getPinpointManager(getApplicationContext());
-//            Amplify.Auth.signInWithWebUI(
-//                    this,
-//                    result -> Log.i("AuthQuickStart", result.toString()),
-//                    error -> Log.e("AuthQuickStart", error.toString())
-//            );
+
+             getPinpointManager(getApplicationContext());
+
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
 
+
+
+        Button signOutButton=findViewById(R.id.signOutId);
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Amplify.Auth.signOut(
+                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+            }
+        });
 
 
         Button btn2=findViewById(R.id.btn2);

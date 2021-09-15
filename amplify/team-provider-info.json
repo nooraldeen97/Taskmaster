@@ -13,6 +13,7 @@
     },
     "categories": {
       "auth": {
+
         "taskmaster54aa4f11": {}
       },
       "notifications": {
@@ -21,6 +22,7 @@
           "Id": "2052221b94d840d69c6c667fa4b1d67c",
           "Region": "us-east-1"
         }
+
       }
     }
   }
