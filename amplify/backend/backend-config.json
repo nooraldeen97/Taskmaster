@@ -6,11 +6,7 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 15,
-              "description": "description"
-            }
+            "authenticationType": "AWS_IAM"
           },
           "additionalAuthenticationProviders": []
         }
@@ -39,6 +35,14 @@
           "SMS"
         ]
       }
+    }
+  },
+  "notifications": {
+    "taskmasterhcAGD": {
+      "service": "Pinpoint",
+      "channels": [
+        "FCM"
+      ]
     }
   }
 }
