@@ -13,7 +13,17 @@
     },
     "categories": {
       "auth": {
+
         "taskmaster1541bc93": {}
+
+      },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "taskmasterhcAGD-dev",
+          "Id": "2052221b94d840d69c6c667fa4b1d67c",
+          "Region": "us-east-1"
+        }
+
       }
     }
   }
