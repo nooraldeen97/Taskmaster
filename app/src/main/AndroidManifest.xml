@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.taskmaster">
@@ -11,7 +12,14 @@
         android:theme="@style/Theme.Taskmaster">
         <activity android:name=".SettingsPage"></activity>
         <activity android:name=".DetailsPage" />
-        <activity android:name=".AddTask" />
+        <activity android:name=".AddTask" >
+        <intent-filter android:label="add to tasks">
+            <action android:name="android.intent.action.SEND"/>
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="text/plain"/>
+        </intent-filter>
+        </activity>
         <activity android:name=".AllTasks" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -30,14 +38,12 @@
                 <data android:scheme="myapp" />
             </intent-filter>
         </activity>
-
-        <service
+       <service
             android:name=".PushListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-
     </application>
 
 

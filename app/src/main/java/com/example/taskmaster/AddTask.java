@@ -45,6 +45,12 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
+        Intent intent=getIntent();
+        if(intent.getType()!=null && intent.getType().equals("text/plain")){
+            Log.i("test",intent.getExtras().get(Intent.EXTRA_TEXT).toString());
+            EditText editTextDescription=findViewById(R.id.taskBodyId);
+            editTextDescription.setText(intent.getExtras().get(Intent.EXTRA_TEXT).toString());
+        }
 
         // calling the action bar
         ActionBar actionBar=getSupportActionBar();
