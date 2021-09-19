@@ -11,7 +11,14 @@
         android:theme="@style/Theme.Taskmaster">
         <activity android:name=".SettingsPage"></activity>
         <activity android:name=".DetailsPage" />
-        <activity android:name=".AddTask" />
+        <activity android:name=".AddTask" >
+        <intent-filter android:label="add to tasks">
+            <action android:name="android.intent.action.SEND"/>
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="text/plain"/>
+        </intent-filter>
+        </activity>
         <activity android:name=".AllTasks" />
         <activity android:name=".MainActivity">
             <intent-filter>
