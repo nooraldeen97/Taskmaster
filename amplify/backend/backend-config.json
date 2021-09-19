@@ -6,7 +6,11 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AWS_IAM"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 100,
+              "description": "description"
+            }
           },
           "additionalAuthenticationProviders": []
         }
@@ -14,7 +18,7 @@
     }
   },
   "auth": {
-    "taskmaster92c26669": {
+    "taskmaster1541bc93": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -35,6 +39,12 @@
           "SMS"
         ]
       }
+    }
+  },
+  "storage": {
+    "s30dfc7377": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

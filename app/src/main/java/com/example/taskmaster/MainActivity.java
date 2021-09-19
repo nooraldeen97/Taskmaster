@@ -25,12 +25,14 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttributeKey;
+//import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+//import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.MyTask;
 import com.amplifyframework.datastore.generated.model.Tasks;
 import com.amplifyframework.datastore.generated.model.Team;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,15 +45,17 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             // Add these lines to add the AWSApiPlugin plugins
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
-
-            Amplify.Auth.signInWithWebUI(
-                    this,
-                    result -> Log.i("AuthQuickStart", result.toString()),
-                    error -> Log.e("AuthQuickStart", error.toString())
-            );
+//            Amplify.addPlugin(new AWSDataStorePlugin());
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+//            Amplify.Auth.signInWithWebUI(
+//                    this,
+//                    result -> Log.i("AuthQuickStart", result.toString()),
+//                    error -> Log.e("AuthQuickStart", error.toString())
+//            );
 // Adding three hard coded teams by running mutuation three times to the database.
 
             //            Team team1 = Team.builder()
@@ -116,16 +120,16 @@ public class MainActivity extends AppCompatActivity {
 //                error -> Log.e("AmplifyQuickstart", error.toString())
 //        );
 
-        Button signOutButton=findViewById(R.id.signOutId);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Amplify.Auth.signOut(
-                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
-                        error -> Log.e("AuthQuickstart", error.toString())
-                );
-            }
-        });
+//        Button signOutButton=findViewById(R.id.signOutId);
+//        signOutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Amplify.Auth.signOut(
+//                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+//                        error -> Log.e("AuthQuickstart", error.toString())
+//                );
+//            }
+//        });
 
 
         setContentView(R.layout.activity_main);

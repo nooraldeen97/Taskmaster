@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "taskmaster92c26669_identitypool_92c26669",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "taskma92c26669",
-    "userPoolName": "taskmaster92c26669_userpool_92c26669",
+    "identityPoolName": "taskmaster1541bc93_identitypool_1541bc93",
+    "allowUnauthenticatedIdentities": true,
+    "resourceNameTruncated": "taskma1541bc93",
+    "userPoolName": "taskmaster1541bc93_userpool_1541bc93",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "taskma92c26669_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "taskma1541bc93_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "92c26669",
-    "resourceName": "taskmaster92c26669",
+    "sharedId": "1541bc93",
+    "resourceName": "taskmaster1541bc93",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -49,14 +49,13 @@
         ]
     },
     "useDefault": "defaultSocial",
-    "userPoolGroupList": [],
-    "serviceName": "Cognito",
-    "usernameCaseSensitive": false,
-    "dependsOn": [],
     "hostedUI": true,
-    "hostedUIDomainName": "taskmaster1fa90c9b-1fa90c9b",
+    "hostedUIDomainName": "taskmaster1541bc93-1541bc93",
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"myapp://callback/\"],\"LogoutURLs\":[\"myapp://signout/\"]}",
-    "authProviders": []
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
+    "dependsOn": []
 }
