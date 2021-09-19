@@ -25,29 +25,17 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttributeKey;
+//import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+//import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.MyTask;
 import com.amplifyframework.datastore.generated.model.Tasks;
 import com.amplifyframework.datastore.generated.model.Team;
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
-
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.UserStateDetails;
-import com.amazonaws.mobile.config.AWSConfiguration;
-import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
-import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     private static PinpointManager pinpointManager;
@@ -90,40 +78,102 @@ public class MainActivity extends AppCompatActivity {
         }
         return pinpointManager;
     }
-
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         try {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
 //            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
+           getPinpointManager(getApplicationContext());
+//            Amplify.addPlugin(new AWSDataStorePlugin());
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+//            Amplify.Auth.signInWithWebUI(
+//                    this,
+//                    result -> Log.i("AuthQuickStart", result.toString()),
+//                    error -> Log.e("AuthQuickStart", error.toString())
+//            );
+// Adding three hard coded teams by running mutuation three times to the database.
 
-             getPinpointManager(getApplicationContext());
+            //            Team team1 = Team.builder()
+//                    .name("DG Team")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team1),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
+            //     Team team2 = Team.builder()
+//                    .name("Nerd Team")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team2),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
 
+//            Team team3 = Team.builder()
+//                    .name("DG Team")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team3),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+// this should be on sign up page , and the email and username and password take them from the form.
+//        AuthSignUpOptions options = AuthSignUpOptions.builder()
+//                .userAttribute(AuthUserAttributeKey.email(), "noor-aldeen97@hotmail.com")
+//                .build();
+//        Amplify.Auth.signUp("nooraldeen", "Pass12345", options,
+//                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
+//                error -> Log.e("AuthQuickStart", "Sign up failed", error)
+//        );
+//sign up confimation activity to enter the code the he recieved.
+
+//        Amplify.Auth.confirmSignUp(
+//                "nooraldeen",
+//                "285210",
+//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
 
 
+//        Amplify.Auth.signIn(
+//                "username",
+//                "password",
+//                result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
+//        Amplify.Auth.fetchAuthSession(
+//                result -> Log.i("AmplifyQuickstart", result.toString()),
+//                error -> Log.e("AmplifyQuickstart", error.toString())
+//        );
 
-        Button signOutButton=findViewById(R.id.signOutId);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Amplify.Auth.signOut(
-                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
-                        error -> Log.e("AuthQuickstart", error.toString())
-                );
-            }
-        });
+//        Button signOutButton=findViewById(R.id.signOutId);
+//        signOutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Amplify.Auth.signOut(
+//                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+//                        error -> Log.e("AuthQuickstart", error.toString())
+//                );
+//            }
+//        });
 
+
+        setContentView(R.layout.activity_main);
 
         Button btn2=findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -223,22 +273,19 @@ public class MainActivity extends AppCompatActivity {
 
             recyclerView = findViewById(R.id.TaskRecyclerView);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new TaskAdapter(allTasks));
+            recyclerView.setAdapter(new TaskAdapter(teamTasks));
 
 
 
         Amplify.API.query(
                 ModelQuery.list(MyTask.class),
-                response ->
-
-                {
-                    Log.i("hereIS",response.toString());
-
+                response -> {
                     for (MyTask task : response.getData()) {
 //                        Log.i("MyAmplifyApp", task.getBody());
 //                        Log.i("MyAmplifyApp", task.getState());
 //                        Log.i("MyAmplifyApp", task.getTitle());
                         allTasks.add(task);
+
                     }
                     for (int i = 0; i < allTasks.size(); i++) {
                         if(allTasks.get(i).getTeam().getName().equals(teamInputFromSetting)){
@@ -249,7 +296,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("MyAmplifyApp", "outside the loop");
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
-
         );
 
 
@@ -291,4 +337,3 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-}
