@@ -41,10 +41,19 @@
       }
     }
   },
+
   "storage": {
     "s30dfc7377": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
+
+  "notifications": {
+    "taskmasterhcAGD": {
+      "service": "Pinpoint",
+      "channels": [
+        "FCM"
+      ]
+
     }
   }
 }
