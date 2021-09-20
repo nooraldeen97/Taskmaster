@@ -24,11 +24,15 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class MyTask implements Model {
   public static final QueryField ID = field("MyTask", "id");
   public static final QueryField TITLE = field("MyTask", "title");
+  public static final QueryField LAT = field("MyTask", "lat");
+  public static final QueryField LON = field("MyTask", "lon");
   public static final QueryField BODY = field("MyTask", "body");
   public static final QueryField STATE = field("MyTask", "state");
   public static final QueryField TEAM = field("MyTask", "teamID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
+  private final @ModelField(targetType="String") String lat;
+  private final @ModelField(targetType="String") String lon;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String state;
   private final @ModelField(targetType="Team", isRequired = true) @BelongsTo(targetName = "teamID", type = Team.class) Team team;
@@ -40,6 +44,14 @@ public final class MyTask implements Model {
   
   public String getTitle() {
       return title;
+  }
+  
+  public String getLat() {
+      return lat;
+  }
+  
+  public String getLon() {
+      return lon;
   }
   
   public String getBody() {
@@ -62,9 +74,11 @@ public final class MyTask implements Model {
       return updatedAt;
   }
   
-  private MyTask(String id, String title, String body, String state, Team team) {
+  private MyTask(String id, String title, String lat, String lon, String body, String state, Team team) {
     this.id = id;
     this.title = title;
+    this.lat = lat;
+    this.lon = lon;
     this.body = body;
     this.state = state;
     this.team = team;
@@ -80,6 +94,8 @@ public final class MyTask implements Model {
       MyTask myTask = (MyTask) obj;
       return ObjectsCompat.equals(getId(), myTask.getId()) &&
               ObjectsCompat.equals(getTitle(), myTask.getTitle()) &&
+              ObjectsCompat.equals(getLat(), myTask.getLat()) &&
+              ObjectsCompat.equals(getLon(), myTask.getLon()) &&
               ObjectsCompat.equals(getBody(), myTask.getBody()) &&
               ObjectsCompat.equals(getState(), myTask.getState()) &&
               ObjectsCompat.equals(getTeam(), myTask.getTeam()) &&
@@ -93,6 +109,8 @@ public final class MyTask implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getTitle())
+      .append(getLat())
+      .append(getLon())
       .append(getBody())
       .append(getState())
       .append(getTeam())
@@ -108,6 +126,8 @@ public final class MyTask implements Model {
       .append("MyTask {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
+      .append("lat=" + String.valueOf(getLat()) + ", ")
+      .append("lon=" + String.valueOf(getLon()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
       .append("team=" + String.valueOf(getTeam()) + ", ")
@@ -145,6 +165,8 @@ public final class MyTask implements Model {
       null,
       null,
       null,
+      null,
+      null,
       null
     );
   }
@@ -152,6 +174,8 @@ public final class MyTask implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       title,
+      lat,
+      lon,
       body,
       state,
       team);
@@ -169,6 +193,8 @@ public final class MyTask implements Model {
   public interface BuildStep {
     MyTask build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep lat(String lat);
+    BuildStep lon(String lon);
     BuildStep body(String body);
     BuildStep state(String state);
   }
@@ -178,6 +204,8 @@ public final class MyTask implements Model {
     private String id;
     private String title;
     private Team team;
+    private String lat;
+    private String lon;
     private String body;
     private String state;
     @Override
@@ -187,6 +215,8 @@ public final class MyTask implements Model {
         return new MyTask(
           id,
           title,
+          lat,
+          lon,
           body,
           state,
           team);
@@ -203,6 +233,18 @@ public final class MyTask implements Model {
      public BuildStep team(Team team) {
         Objects.requireNonNull(team);
         this.team = team;
+        return this;
+    }
+    
+    @Override
+     public BuildStep lat(String lat) {
+        this.lat = lat;
+        return this;
+    }
+    
+    @Override
+     public BuildStep lon(String lon) {
+        this.lon = lon;
         return this;
     }
     
@@ -230,10 +272,12 @@ public final class MyTask implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state, Team team) {
+    private CopyOfBuilder(String id, String title, String lat, String lon, String body, String state, Team team) {
       super.id(id);
       super.title(title)
         .team(team)
+        .lat(lat)
+        .lon(lon)
         .body(body)
         .state(state);
     }
@@ -246,6 +290,16 @@ public final class MyTask implements Model {
     @Override
      public CopyOfBuilder team(Team team) {
       return (CopyOfBuilder) super.team(team);
+    }
+    
+    @Override
+     public CopyOfBuilder lat(String lat) {
+      return (CopyOfBuilder) super.lat(lat);
+    }
+    
+    @Override
+     public CopyOfBuilder lon(String lon) {
+      return (CopyOfBuilder) super.lon(lon);
     }
     
     @Override

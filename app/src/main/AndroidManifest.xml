@@ -1,7 +1,9 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.taskmaster">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -38,13 +40,11 @@
                 <data android:scheme="myapp" />
             </intent-filter>
         </activity>
-       <service
-            android:name=".PushListenerService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-    </application>
+        <service
+            android:name=".AddTask"
+            android:foregroundServiceType="location">
+        <!-- Any inner elements would go here. -->
+    </service>
 
+</application>
 
-</manifest>
