@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -24,7 +25,6 @@ public class DetailsPage extends AppCompatActivity {
         String taskNameValue = intent.getExtras().getString("taskName");
         TextView taskTitleView = findViewById(R.id.titleText);
         taskTitleView.setText(taskNameValue);
-
 
 
         ImageView detailsImage = findViewById(R.id.detailsImgID);

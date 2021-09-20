@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.taskmaster">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -37,7 +40,13 @@
                 <data android:scheme="myapp" />
             </intent-filter>
         </activity>
-    </application>
+        <service
+            android:name=".AddTask"
+            android:foregroundServiceType="location">
+        <!-- Any inner elements would go here. -->
+    </service>
+
+</application>
 
 
 </manifest>

@@ -119,3 +119,12 @@ Modify your Add Task form to include either a Spinner or Radio Buttons for which
 
 Settings Page<br>
 In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display <br>only that team’s tasks on the homepage.<br>
+
+
+# Lab: 42 - Location
+
+Location
+When the user adds a task, their location should be retrieved and included as part of the saved Task.
+
+Displaying Location
+On the Task Detail activity, the location of a Task should be displayed if it exists.
